@@ -4,11 +4,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.sql.Connection;
 
 @WebServlet(name = "Servlet_newuser", urlPatterns = {"/newuser"})
 public class Servlet_newuser extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        try {
+            Connection conn = DB_Conn.getDB();
+            DB_Conn.newUser("Arnaud", "coucou", conn);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

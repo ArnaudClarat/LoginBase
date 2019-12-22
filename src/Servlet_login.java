@@ -23,11 +23,13 @@ public class Servlet_login extends HttpServlet {
         }
         assert connection != null;
         if (DB_Conn.verifPass(nom, password, connection)) {
+            System.out.println("Pass OK");
             HttpSession session = request.getSession();
             session.setAttribute("nom", nom);
             request.getRequestDispatcher("views/bienvenue.jsp").forward(request, response);
         } else {
             request.getRequestDispatcher("views/login.jsp").forward(request, response);
+            System.out.println("Pass NOK");
         }
 
         /*

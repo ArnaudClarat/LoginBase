@@ -1,3 +1,4 @@
+import java.security.NoSuchAlgorithmException;
 import java.sql.*;
 
 public class DB_Conn {
@@ -22,13 +23,15 @@ public class DB_Conn {
     }
 
     public static boolean newUser(String nom, String pass, Connection conn) {
-        MD5 passMD5 = new MD5(pass);
-        String sql = "INSERT INTO users VALUES(,"+ nom +", " + passMD5.getHash() + ")";
+        MD5 md5 = new MD5();
         try {
-            Statement st = conn.createStatement();
-            System.out.println(st.executeQuery(sql).getBoolean(0));
-            return true;
-        } catch (SQLException e) {
+            md5.setHash(pass);
+            String passMD5 = md5.getHash();
+            PreparedStatement pStmt = conn.prepareStatement("INSERT INTO users (U_Login, U_Pass) VALUES(?,?)");
+            pStmt.setString(1, nom);
+            pStmt.setString(2, passMD5);
+            return pStmt.execute();
+        } catch (NoSuchAlgorithmException | SQLException e) {
             e.printStackTrace();
             return false;
         }
@@ -42,9 +45,10 @@ public class DB_Conn {
             preparedStmt.setString (1, nom);
             ResultSet rs = preparedStmt.executeQuery();
             rs.next();
-            MD5 passMD5 = new MD5(rs.getString("U_Pass"));
-            return (passMD5.equals(pass));
-        } catch (SQLException e) {
+            MD5 md5 = new MD5();
+            md5.setHash(rs.getString("U_Pass"));
+            return (md5.equals(pass));
+        } catch (SQLException | NoSuchAlgorithmException e) {
             e.printStackTrace();
             return false;
         }
