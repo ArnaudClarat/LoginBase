@@ -15,7 +15,13 @@ public class Servlet_login extends HttpServlet {
         String nom = request.getParameter("nom");
         String password = request.getParameter("password");
 
-        Connection connection = DB_Conn.getDB();;
+        Connection connection = null;
+        try {
+            connection = DB_Conn.getDB();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        assert connection != null;
         if (DB_Conn.verifPass(nom, password, connection)) {
             HttpSession session = request.getSession();
             session.setAttribute("nom", nom);

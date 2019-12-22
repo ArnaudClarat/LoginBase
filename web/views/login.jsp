@@ -1,6 +1,5 @@
 <%--
-  Created by IntelliJ IDEA.
-  User: ArnaudClarat
+  Created by ArnaudClarat
   Date: 11-12-19
   Time: 18:33
   To change this template use File | Settings | File Templates.
@@ -16,9 +15,7 @@
         Password : <input type="text" name="password">
         <input type="submit" value="Login">
     </form>
-    <form action="newUser" method="post">
-        Nouveau nom : <input type="text" name="newNom">
-        Nouveau password : <input type="text" name="newPassword">
+    <form action="newuser" method="post">
         <input type="submit" value="New User">
     </form>
 </body>

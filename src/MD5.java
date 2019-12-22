@@ -19,9 +19,15 @@ public class MD5 {
         this.hash = Arrays.toString(md.digest());
     }
 
-    public boolean equals(String s) throws NoSuchAlgorithmException {
-        MessageDigest md = MessageDigest.getInstance("MD5");
-        md.update(s.getBytes());
-        return Arrays.toString(md.digest()).equals(s);
+    public boolean equals(String s) {
+        MessageDigest md = null;
+        try {
+            md = MessageDigest.getInstance("MD5");
+            md.update(s.getBytes());
+            return Arrays.toString(md.digest()).equals(s);
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 }
