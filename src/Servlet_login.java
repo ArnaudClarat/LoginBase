@@ -15,12 +15,8 @@ public class Servlet_login extends HttpServlet {
         String nom = request.getParameter("nom");
         String password = request.getParameter("password");
 
-        Connection connection = null;
-        try {
-            connection = DB_Conn.getDB();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
+        Connection connection;
+        connection = DB_Conn.getDB();
         assert connection != null;
         if (DB_Conn.verifPass(nom, password, connection)) {
             System.out.println("Pass OK");
