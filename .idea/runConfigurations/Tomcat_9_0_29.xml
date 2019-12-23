@@ -1,5 +1,6 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="Tomcat 9.0.29" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 9.0.29" ALTERNATIVE_JRE_ENABLED="false">
+    <option name="COMMON_VM_ARGUMENTS" value="--enable-preview" />
     <option name="UPDATING_POLICY" value="update-resources" />
     <deployment>
       <artifact name="LoginBase:war exploded">

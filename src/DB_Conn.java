@@ -5,7 +5,7 @@ public class DB_Conn {
     private static DB_Conn connectionDatabase;
     private static Connection conn;
 
-    static Connection getDB() throws ClassNotFoundException {
+    static Connection getDB() {
         try {
             System.out.println("Loading driver");
             Class.forName("com.mysql.cj.jdbc.Driver"); // Chargement du driver

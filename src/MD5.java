@@ -1,10 +1,11 @@
+import org.apache.commons.codec.binary.Hex;
 import java.security.*;
 import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
-import org.apache.commons.codec.binary.Hex;
+import javax.xml.bind.DatatypeConverter;
 
 public class MD5 {
-    public String hash;
+    private String hash;
 
     public String getHash(){
        return this.hash;
@@ -14,8 +15,11 @@ public class MD5 {
         MessageDigest md = MessageDigest.getInstance("MD5");
         md.update(pass.getBytes());
         byte[] digest = md.digest();
+        System.out.println(Arrays.toString(digest));
         String passMD5 = DatatypeConverter.printHexBinary(digest).toUpperCase();
-        passMD5 : Hex.en
+        // String passMD5 = Hex.encodeHexString(digest);
+        // String passMD5 = new String(digest);
+        System.out.println(passMD5);
         this.hash = passMD5;
 
         /*
@@ -28,7 +32,7 @@ public class MD5 {
     }
 
     public boolean equals(String s) {
-        MessageDigest md = null;
+        MessageDigest md;
         try {
             md = MessageDigest.getInstance("MD5");
             md.update(s.getBytes());
